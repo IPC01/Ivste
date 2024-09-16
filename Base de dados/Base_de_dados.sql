@@ -14,10 +14,9 @@ CREATE TABLE Quarto (
 CREATE TABLE Estacoes (
     id_estacao INT PRIMARY KEY,
     nome VARCHAR(100),
-    data_inicio DATE,
-    data_fim DATE,
     percentual_desconto DECIMAL(5, 2)
 );
+
 CREATE TABLE Clientes (
     id_cliente INT PRIMARY KEY,
     nome VARCHAR(100),

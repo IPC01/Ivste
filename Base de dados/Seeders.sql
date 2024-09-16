@@ -10,8 +10,13 @@ INSERT INTO Quarto (Nr_quarto, id_categoria, capacidade, preco_diario) VALUES (1
 INSERT INTO Quarto (Nr_quarto, id_categoria, capacidade, preco_diario) VALUES (103, 3, 1, 80.00);
 
 --Estacoes
-INSERT INTO Estacoes (id_estacao, nome, data_inicio, data_fim, percentual_desconto) VALUES (1, 'Alta Temporada', TO_DATE('2024-12-01', 'YYYY-MM-DD'), TO_DATE('2025-01-31', 'YYYY-MM-DD'), 15.00);
-INSERT INTO Estacoes (id_estacao, nome, data_inicio, data_fim, percentual_desconto) VALUES (2, 'Baixa Temporada', TO_DATE('2024-02-01', 'YYYY-MM-DD'), TO_DATE('2024-11-30', 'YYYY-MM-DD'), 5.00);
+
+INSERT INTO Estacoes (id_estacao, nome, percentual_desconto)
+VALUES
+(1, 'Inverno', 10.00),
+(2, 'Verão', 5.00),
+(2, 'Estação de Transição', 5.00);
+
 
 
 
