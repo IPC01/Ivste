@@ -13,9 +13,9 @@ INSERT INTO Quarto (Nr_quarto, id_categoria, capacidade, preco_diario) VALUES (1
 
 INSERT INTO Estacoes (id_estacao, nome, percentual_desconto)
 VALUES
-(1, 'Inverno', 10.00),
+(1, 'Inverno', 15.00),
 (2, 'Verão', 5.00),
-(2, 'Estação de Transição', 5.00);
+(3, 'Estação de Transição', 10.00);
 
 
 
