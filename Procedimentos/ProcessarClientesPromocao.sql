@@ -28,7 +28,7 @@ CREATE OR REPLACE PROCEDURE ProcessarClientesPromocao (
     FROM RESERVA
     WHERE ID_CLIENTE = client_id;
 
-  -- Cursor para selecionar ID_CLIENTE com mais de uma reserva
+  -- Cursor para selecionar ID_CLIENTE com mais de determinado x de reserva
   CURSOR cliente_id IS
     SELECT ID_CLIENTE
     FROM RESERVA
@@ -38,7 +38,7 @@ CREATE OR REPLACE PROCEDURE ProcessarClientesPromocao (
 
 BEGIN
 
-  -- Inicializa a Nested Table
+  -- Inicializa a Nested Table/array
   Array_clientes := nested_table_type();
 
   -- Abre o cursor cliente_id
