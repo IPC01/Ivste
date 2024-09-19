@@ -1,0 +1,131 @@
+ metodo de promocao
+SET SERVEROUTPUT ON;
+
+DECLARE
+  -- Cursor para selecionar ID_CLIENTE com mais de uma reserva
+  CURSOR cliente_id IS
+    SELECT ID_CLIENTE
+    FROM RESERVA
+    WHERE EXTRACT(YEAR FROM DATA_CHECKIN) = EXTRACT(YEAR FROM SYSDATE)
+    GROUP BY ID_CLIENTE
+    HAVING COUNT(ID_RESERVA) >= 2 ;
+
+  -- Tipo de Nested Table para armazenar IDs de clientes
+  TYPE nested_table_type IS TABLE OF NUMBER;
+  Array_clientes nested_table_type;
+
+  -- Variáveis para armazenar os valores dos cursores
+  id_c NUMBER;
+  id_r NUMBER;
+  valor NUMBER := 0;
+  valor_atual NUMBER;
+
+  -- Cursor para selecionar ID_RESERVA baseado no ID_CLIENTE
+  CURSOR reserva_id (client_id NUMBER) IS
+    SELECT ID_RESERVA
+    FROM RESERVA
+    WHERE ID_CLIENTE = client_id;
+
+  -- Número de IDs aleatórios a serem inseridos
+  num_random_ids CONSTANT NUMBER := 10; -- Ajuste o número conforme necessário
+
+BEGIN
+  -- Inicializa a Nested Table
+  Array_clientes := nested_table_type();
+
+  -- Abre o cursor cliente_id
+  OPEN cliente_id;
+  
+  LOOP
+    -- Busca o próximo valor de cliente_id
+    FETCH cliente_id INTO id_c;
+    
+    -- Sai do loop se não houver mais linhas
+    EXIT WHEN cliente_id%NOTFOUND;
+
+    -- Inicializa o valor para cada cliente
+    valor := 0;
+
+    -- Abre o cursor reserva_id para o cliente atual
+    OPEN reserva_id(id_c);
+    
+    LOOP
+      -- Busca o próximo valor de reserva_id
+      FETCH reserva_id INTO id_r;
+      
+      -- Sai do loop se não houver mais linhas
+      EXIT WHEN reserva_id%NOTFOUND;
+
+      -- Exibe o valor de ID_RESERVA
+      DBMS_OUTPUT.PUT_LINE('Cliente: ' || id_c || ' | Reserva: ' || id_r);
+
+      -- Seleciona o valor da reserva atual
+      BEGIN
+        SELECT VALOR_ATUAL INTO valor_atual
+        FROM HISTORICO_DE_RESERVAS
+        WHERE ID_RESERVA = id_r
+        AND DATA_CHECK_OUT IS NOT NULL;
+
+        -- Soma o valor atual ao valor total
+        valor := valor + valor_atual;
+      EXCEPTION
+        WHEN NO_DATA_FOUND THEN
+          valor_atual := 0;
+      END;
+      
+    END LOOP;
+
+    -- Fecha o cursor reserva_id após processar todas as reservas para o cliente
+    CLOSE reserva_id;
+
+    -- Adiciona o cliente à Nested Table se o valor total for superior a 10.000
+    IF valor > 10000 THEN
+      Array_clientes.EXTEND;
+      Array_clientes(Array_clientes.COUNT) := id_c;
+    END IF;
+  END LOOP;
+
+  -- Fecha o cursor cliente_id após processar todos os clientes
+  CLOSE cliente_id;
+
+  -- Exibe clientes com valor total superior a 10.000
+  DBMS_OUTPUT.PUT_LINE('Clientes com valor total superior a 10.000:');
+  FOR i IN 1..Array_clientes.COUNT LOOP
+    DBMS_OUTPUT.PUT_LINE('Cliente ID: ' || Array_clientes(i));
+  END LOOP;
+
+  -- Verifica se há pelo menos um cliente
+  IF Array_clientes.COUNT > 0 THEN
+    -- Adiciona IDs aleatórios na tabela Estados_do_cliente
+    DECLARE
+      num_to_insert NUMBER;
+      idx INTEGER;
+      random_idx INTEGER;
+      inserted_count NUMBER := 0;
+    BEGIN
+      -- Define o número de IDs aleatórios a serem inseridos
+      num_to_insert := LEAST(2, Array_clientes.COUNT);
+
+      WHILE inserted_count < num_to_insert LOOP
+        -- Gera um índice aleatório único
+        random_idx := TRUNC(DBMS_RANDOM.VALUE(1, Array_clientes.COUNT + 1));
+        
+        -- Garante que o índice seja único e válido
+        IF random_idx BETWEEN 1 AND Array_clientes.COUNT THEN
+          -- Insere o cliente na tabela
+          INSERT INTO Estados_do_cliente (id_cliente, id_historico, estado_anterior, estado_atual, data_inicio, data_fim)
+          VALUES (Array_clientes(random_idx), Array_clientes(random_idx) + 190, 1, 5, TO_DATE('2024-09-21', 'YYYY-MM-DD'), TO_DATE('2024-09-26', 'YYYY-MM-DD'));
+          commit;
+          DBMS_OUTPUT.PUT_LINE('Dados inseridos para o cliente ID: ' || Array_clientes(random_idx));
+          
+          inserted_count := inserted_count + 1;
+        END IF;
+      END LOOP;
+    END;
+  ELSE
+    DBMS_OUTPUT.PUT_LINE('Nenhum cliente com valor total superior a 10.000 encontrado.');
+  END IF;
+
+END;
+
+ 

@@ -64,14 +64,11 @@ CREATE TABLE Historico_de_reservas (
 );
 
 CREATE TABLE Estados_do_cliente (
+    id_historico INT PRIMARY KEY,
     id_cliente INT,
-    id_historico INT,
     estado_anterior INT,
-    estado_atual INT,
     data_inicio DATE,
     data_fim DATE,
-    PRIMARY KEY (id_cliente, id_historico),
     FOREIGN KEY (id_cliente) REFERENCES Clientes(id_cliente),
-    FOREIGN KEY (estado_anterior) REFERENCES Estados(id_estado),
-    FOREIGN KEY (estado_atual) REFERENCES Estados(id_estado)
+    FOREIGN KEY (estado_anterior) REFERENCES Estados_do_cliente(id_historico)
 );
