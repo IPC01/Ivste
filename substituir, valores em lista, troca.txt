@@ -1,0 +1,17 @@
+substituir, valores em lista, trocar icon de visao
+
+usar services - v2 para valores, missao
+trocar background por um cinza alternando por seccao
+tirar botao mais sobre nos.
+retirar newslatter
+
+centralizar colocar numa section e aumentar espacamento larrgura do imput[row my-5 {justify-center col-lg-6}]
+
+between no published
+
+
+Nosso compromisso é fornecer serviços
+                           eficientes e personalizados para apoiar o crescimento dos nossos clientes</p>
+  <button type="submit" class="btn btn-primary btn-lg"  >
+                         <i class="bi bi-search"></i>
+                      </button>

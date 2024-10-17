@@ -1,0 +1,12 @@
+data de cancelamento
+
+
+1. identifique quantas reservas foram deitas de 01/02 ate 30/11 por um cada cliente quais fizeram mais de 2.
+2.identificar se no historico dessas reservas somando todos valores das reservas finalizadas chega a 10000mt;
+3. escolher 5 desses e atribuir o estado true para eles.
+
+1. selecionar os id de clientes com mais de x reservas.
+2. selecionar id das reservas  do cliente do passo 1;
+3. somar todos valores actuacis dessas reservas onde a data de check-out nao e nula;
+4. verificar de e maior ou igual a um dado valor y, se for quardar o id numa tabela ou cursor.
+5. actualizar o estado desses id para 5-promocao para x nr de id aleatorios.

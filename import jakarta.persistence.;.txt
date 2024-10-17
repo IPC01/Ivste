@@ -1,0 +1,161 @@
+import jakarta.persistence.*;
+import java.util.Date;
+
+@Entity
+@Table(name = "ano_lectivo")
+public class AnoLectivo {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_ano")
+    private int idAno;
+
+    @Column(name = "data_inicio")
+    @Temporal(TemporalType.DATE)
+    private Date dataInicio;
+
+    @Column(name = "data_fim")
+    @Temporal(TemporalType.DATE)
+    private Date dataFim;
+
+    @Column(name = "quantidade_divisoes")
+    private int quantidadeDivisoes;
+
+    @Column(name = "propinas")
+    private int propinas;
+
+    @Column(name = "valor_matricula")
+    private double valorMatricula;
+
+    @Column(name = "data_inicio_matricula")
+    @Temporal(TemporalType.DATE)
+    private Date dataInicioMatricula;
+
+    @Column(name = "data_fim_matricula")
+    @Temporal(TemporalType.DATE)
+    private Date dataFimMatricula;
+
+    // Getters e Setters
+}
+============================================================================================
+
+import jakarta.persistence.*;
+import java.util.Date;
+
+@Entity
+@Table(name = "semestre_trimestre")
+public class SemestreTrimestre {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_ano")
+    private int idAno;
+
+    @Column(name = "data_inicio")
+    @Temporal(TemporalType.DATE)
+    private Date dataInicio;
+
+    @Column(name = "data_fim")
+    @Temporal(TemporalType.DATE)
+    private Date dataFim;
+
+    @Column(name = "classificacao")
+    private int classificacao;
+
+    @Column(name = "data_inicio_inscricao")
+    @Temporal(TemporalType.DATE)
+    private Date dataInicioInscricao;
+
+    @Column(name = "data_fim_inscricao")
+    @Temporal(TemporalType.DATE)
+    private Date dataFimInscricao;
+
+    // Getters e Setters
+}
+===================================================================================================================
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "curso")
+public class Curso {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_curso")
+    private int idCurso;
+
+    @Column(name = "nome")
+    private String nome;
+
+    @Column(name = "valor")
+    private double valor;
+
+    // Getters e Setters
+}
+====================================================================================
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "estudante")
+public class Estudante {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_estudante")
+    private int idEstudante;
+
+    @Column(name = "nome")
+    private String nome;
+
+    @Column(name = "apelido")
+    private String apelido;
+
+    @Column(name = "email")
+    private String email;
+
+    @ManyToOne
+    @JoinColumn(name = "id_curso")
+    private Curso curso;
+
+    @Column(name = "status")
+    private int status;
+
+    @Column(name = "propinas_pagas")
+    private int propinasPagas;
+
+    // Getters e Setters
+}
+================================================================================
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "propinas")
+public class Propina {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_propina")
+    private int idPropina;
+
+    @ManyToOne
+    @JoinColumn(name = "id_ano_sem_trim")
+    private SemestreTrimestre semestreTrimestre;
+
+    @Column(name = "estado_pagamento")
+    private int estadoPagamento;
+
+    @ManyToOne
+    @JoinColumn(name = "id_estudante")
+    private Estudante estudante;
+
+    @Column(name = "entidade")
+    private int entidade;
+
+    @Column(name = "referencia")
+    private int referencia;
+
+    @Column(name = "classificacao")
+    private int classificacao;
+
+    // Getters e Setters
+}

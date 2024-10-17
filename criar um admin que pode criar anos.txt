@@ -1,0 +1,3 @@
+criar um admin que pode criar anos lectivos(ano, inicio, fim, que possua divisão de trimestre(tempo de incricao, data inicio, data fim) so pode ter 3 trimestres dividir o ano lectivo em mais de 2 partes e caracterizar. para as partes deve ter data inicio e fim de inscricao
+
+estudante deve inscrever se ao ano lectivo para poder se inscrever ao semestre.
