@@ -1,7 +1,7 @@
 --Categorias
-INSERT INTO Categorias (id_categoria, nome_categoria) VALUES (1, 'Luxo');
-INSERT INTO Categorias (id_categoria, nome_categoria) VALUES (2, 'Standard');
-INSERT INTO Categorias (id_categoria, nome_categoria) VALUES (3, 'Econômico');
+INSERT INTO Categoria_quarto (id_categoria, nome_categoria) VALUES (1, 'Luxo');
+INSERT INTO Categoria_quarto (id_categoria, nome_categoria) VALUES (2, 'Standard');
+INSERT INTO Categoria_quarto (id_categoria, nome_categoria) VALUES (3, 'Econômico');
 
 
 --Quarto
