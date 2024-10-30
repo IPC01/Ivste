@@ -1,13 +1,14 @@
 --Categorias
-INSERT INTO Categoria_quarto (id_categoria, nome_categoria) VALUES (1, 'Luxo');
-INSERT INTO Categoria_quarto (id_categoria, nome_categoria) VALUES (2, 'Standard');
-INSERT INTO Categoria_quarto (id_categoria, nome_categoria) VALUES (3, 'Econômico');
+INSERT INTO Categoria_quarto (id_categoria, nome_categoria,preco_diario) VALUES (1, 'Luxo',300.00);
+INSERT INTO Categoria_quarto (id_categoria, nome_categoria,preco_diario) VALUES (2, 'Standard',500.00);
+INSERT INTO Categoria_quarto (id_categoria, nome_categoria,preco_diario) VALUES (3, 'Econômico',600.00);
+
 
 
 --Quarto
-INSERT INTO Quarto (Nr_quarto, id_categoria, capacidade, preco_diario) VALUES (101, 1, 2, 300.00);
-INSERT INTO Quarto (Nr_quarto, id_categoria, capacidade, preco_diario) VALUES (102, 2, 3, 150.00);
-INSERT INTO Quarto (Nr_quarto, id_categoria, capacidade, preco_diario) VALUES (103, 3, 1, 80.00);
+INSERT INTO Quarto (Nr_quarto, id_categoria, capacidade) VALUES (101, 1, 2);
+INSERT INTO Quarto (Nr_quarto, id_categoria, capacidade) VALUES (102, 2, 3);
+INSERT INTO Quarto (Nr_quarto, id_categoria, capacidade) VALUES (103, 3, 5);
 
 --Estacoes
 

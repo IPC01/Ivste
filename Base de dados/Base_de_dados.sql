@@ -1,7 +1,8 @@
 -- Criando a tabela Categoria_quarto
 CREATE TABLE Categoria_quarto (
     id_categoria NUMBER PRIMARY KEY,
-    nome_categoria VARCHAR2(255) NOT NULL
+    nome_categoria VARCHAR2(255) NOT NULL,
+      preco_diario DECIMAL(10, 2)
 );
 
 -- Criando sequência para Categoria_quarto
@@ -22,7 +23,6 @@ CREATE TABLE Quarto (
     Nr_quarto NUMBER PRIMARY KEY,
     id_categoria NUMBER,
     capacidade NUMBER,
-    preco_diario DECIMAL(10, 2),
     FOREIGN KEY (id_categoria) REFERENCES Categoria_quarto(id_categoria)
 );
 
